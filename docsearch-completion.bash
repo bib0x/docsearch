@@ -10,7 +10,7 @@ function __docsearch_completions() {
 
     case $prev in
         '-t'|'--topics')
-            files=$(IFS=:; for path in $DOCSEARCH_PATH; do find $path -type f -name "$cur*.yaml" -printf '%f\n'; done | sort -u | sed -E 's/\.yaml$//g')
+            files=$(IFS=:; for path in $DOCSEARCH_PATH; do find -L $path -type f -name "$cur*.yaml" -printf '%f\n'; done | sort -u | sed -E 's/\.yaml$//g')
 
             COMPREPLY=( $(compgen -W "$files" -- $cur) )
             return 0
